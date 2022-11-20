@@ -1,30 +1,24 @@
 {
-    "name": "asm-code-lens",
-    "displayName": "ASM Code Lens",
-    "version": "2.0.0",
-    "publisher": "maziac",
-    "description": "A language server that enables code lens, references, hover information, symbol renaming and the outline view for assembler files.",
+    "name": "bcomp-asm",
+    "displayName": "Basic Computer Assembly",
+    "version": "0.0.1",
+    "publisher": "mamsdeveloper",
+    "description": "A vscode language server that enables highlighting and completion for Basic Computer assembly files.",
     "author": {
-        "name": "Thomas Busse"
+        "name": "Mikhail Butvin"
     },
     "license": "MIT",
     "keywords": [
-        "asm-code-lens",
+        "bcomp-asm",
         "assembler",
-        "references",
-        "code lens",
-        "z80",
-        "hex",
-        "calculator",
-        "hover",
-        "markdown"
+        "bcomp"
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/maziac/asm-code-lens"
+        "url": "https://github.com/mamsdeveloper/bcomp-asm"
     },
     "bugs": {
-        "url": "https://github.com/maziac/asm-code-lens/issues"
+        "url": "https://github.com/mamsdeveloper/bcomp-asm/issues"
     },
     "engines": {
         "vscode": "^1.71.0",
@@ -43,113 +37,113 @@
             "explorer": [
                 {
                     "type": "webview",
-                    "id": "asm-code-lens.calcview-explorer",
+                    "id": "bcomp-asm.calcview-explorer",
                     "name": "Hexadecimal Calculator",
                     "icon": "assets/hexcalc_icon.svg",
                     "contextualTitle": "Hex Calculator",
-                    "when": "config.asm-code-lens.hexCalculator.showInExplorer"
+                    "when": "config.bcomp-asm.hexCalculator.showInExplorer"
                 }
             ],
             "debug": [
                 {
                     "type": "webview",
-                    "id": "asm-code-lens.calcview-debug",
+                    "id": "bcomp-asm.calcview-debug",
                     "name": "Hexadecimal Calculator",
                     "icon": "assets/hexcalc_icon.svg",
                     "contextualTitle": "Hex Calculator",
-                    "when": "config.asm-code-lens.hexCalculator.showInDebug"
+                    "when": "config.bcomp-asm.hexCalculator.showInDebug"
                 }
             ]
         },
         "configuration": {
             "type": "object",
-            "title": "asm-code-lens configuration",
+            "title": "bcomp-asm configuration",
             "properties": {
-                "asm-code-lens.enableOutlineView": {
+                "bcomp-asm.enableOutlineView": {
                     "scope": "window",
                     "type": "boolean",
                     "default": true,
                     "markdownDescription": "Enable/disable outline view for the active document."
                 },
-                "asm-code-lens.enableCodeLenses": {
+                "bcomp-asm.enableCodeLenses": {
                     "scope": "window",
                     "type": "boolean",
                     "default": true,
                     "markdownDescription": "Enable/disable the display of code lenses (references) above labels."
                 },
-                "asm-code-lens.enableHovering": {
+                "bcomp-asm.enableHovering": {
                     "scope": "window",
                     "type": "boolean",
                     "default": true,
                     "markdownDescription": "Enable/disable the of showing information while hovering labels etc."
                 },
-                "asm-code-lens.enableCompletions": {
+                "bcomp-asm.enableCompletions": {
                     "scope": "window",
                     "type": "boolean",
                     "default": true,
                     "markdownDescription": "Enable/disable symbol input completion."
                 },
-                "asm-code-lens.completionsRequiredLength": {
+                "bcomp-asm.completionsRequiredLength": {
                     "scope": "window",
                     "type": "number",
                     "default": 1,
                     "markdownDescription": "The number of characters required before completion proposals will be presented."
                 },
-                "asm-code-lens.enableGotoDefinition": {
+                "bcomp-asm.enableGotoDefinition": {
                     "scope": "window",
                     "type": "boolean",
                     "default": true,
                     "markdownDescription": "Enable/disable 'Go to Type Definition'. You need to reload the extension to take effect."
                 },
-                "asm-code-lens.enableFindAllReferences": {
+                "bcomp-asm.enableFindAllReferences": {
                     "scope": "window",
                     "type": "boolean",
                     "default": true,
                     "markdownDescription": "Enable/disable 'Find All References'."
                 },
-                "asm-code-lens.enableRenaming": {
+                "bcomp-asm.enableRenaming": {
                     "scope": "window",
                     "type": "boolean",
                     "default": true,
                     "markdownDescription": "Enable/disable the possibility to rename labels. You need to reload the extension to take effect."
                 },
-                "asm-code-lens.excludeFiles": {
+                "bcomp-asm.excludeFiles": {
                     "scope": "window",
                     "type": "string",
                     "default": "",
                     "markdownDescription": "Choose what files or directories to exclude e.g `**/*.{inc,s}`."
                 },
-                "asm-code-lens.hexCalculator.showInExplorer": {
+                "bcomp-asm.hexCalculator.showInExplorer": {
                     "scope": "window",
                     "markdownDescription": "Set to false to disable calculator in explorer view.",
                     "type": "boolean",
                     "default": true
                 },
-                "asm-code-lens.hexCalculator.showInDebug": {
+                "bcomp-asm.hexCalculator.showInDebug": {
                     "scope": "window",
                     "markdownDescription": "Set to false to disable calculator in debug view.",
                     "type": "boolean",
                     "default": true
                 },
-                "asm-code-lens.hexCalculator.hexPrefix": {
+                "bcomp-asm.hexCalculator.hexPrefix": {
                     "scope": "window",
                     "markdownDescription": "The prefix to use for hex values, e.g. `0x` or `$`",
                     "type": "string",
                     "default": "0x"
                 },
-                "asm-code-lens.donated": {
+                "bcomp-asm.donated": {
                     "scope": "window",
                     "markdownDescription": "If you donated (press the `Donate...` button in hex calculator to do so) you can hide the button by setting this parameter.",
                     "type": "boolean",
                     "default": false
                 },
-                "asm-code-lens.comments.toggleLineCommentPrefix": {
+                "bcomp-asm.comments.toggleLineCommentPrefix": {
                     "scope": "window",
                     "markdownDescription": "Configure the prefix used when toggling the line comment.",
                     "type": "string",
                     "default": ";"
                 },
-                "asm-code-lens.labels.colon": {
+                "bcomp-asm.labels.colon": {
                     "scope": "window",
                     "markdownDescription": "Determines if labels with or without or both should be recognized.\nPlease note: labels without colons cannot be determined in list files.",
                     "type": "string",
@@ -165,9 +159,9 @@
                     ],
                     "default": "Both"
                 },
-                "asm-code-lens.labels.excludes": {
+                "bcomp-asm.labels.excludes": {
                     "scope": "window",
-                    "markdownDescription": "Configure here a comma separated list of words that should not be recognized as labels. E.g. if asm-code-lens wrongly interprets an assembler directive as label you can exclude it here. For example `if;then;else;elif;endif`. The exclude is case-insensitive.",
+                    "markdownDescription": "Configure here a comma separated list of words that should not be recognized as labels. E.g. if bcomp-asm wrongly interprets an assembler directive as label you can exclude it here. For example `if;then;else;elif;endif`. The exclude is case-insensitive.",
                     "type": "string",
                     "default": ""
                 }
@@ -175,82 +169,48 @@
         },
         "commands": [
             {
-                "command": "asm-code-lens.whatsNew",
-                "title": "Show 'What's New' page of this ASM-Code-Lens release.",
-                "category": "asm-code-lens"
+                "command": "bcomp-asm.whatsNew",
+                "title": "Show 'What's New' page of this bcomp-asm release.",
+                "category": "bcomp-asm"
             },
             {
-                "command": "asm-code-lens.find-labels-with-no-reference",
+                "command": "bcomp-asm.find-labels-with-no-reference",
                 "title": "Find Labels with no Reference",
-                "category": "asm-code-lens"
+                "category": "bcomp-asm"
             }
         ],
         "menus": {
             "editor/context": [
                 {
-                    "when": "resourceLangId == asm-collection || resourceLangId == asm-list-file",
-                    "command": "asm-code-lens.find-labels-with-no-reference",
+                    "when": "resourceLangId == bcomp-asm",
+                    "command": "bcomp-asm.find-labels-with-no-reference",
                     "group": "0_navigation@10"
                 }
             ],
             "commandPalette": [
                 {
-                    "command": "asm-code-lens.find-labels-with-no-reference",
+                    "command": "bcomp-asm.find-labels-with-no-reference",
                     "when": "false"
                 }
             ]
         },
         "languages": [
             {
-                "id": "asm-collection",
+                "id": "bcomp-asm",
                 "extensions": [
-                    ".a80",
-                    ".z80",
-                    ".asm",
-                    ".inc",
-                    ".s"
+                    ".bcomp"
                 ],
                 "aliases": [
-                    "Assembler file"
+                    "Bcomp Assembly"
                 ],
                 "configuration": "./language-configuration.json"
-            },
-            {
-                "id": "asm-list-file",
-                "extensions": [
-                    ".list",
-                    ".lis"
-                ],
-                "aliases": [
-                    "Assembler list file"
-                ],
-                "configuration": "./language-configuration.json"
-            },
-            {
-                "id": "asm-markdown-codeblock"
-            },
-            {
-                "id": "asm-list-markdown-codeblock"
             }
         ],
         "grammars": [
             {
-                "language": "asm-collection",
+                "language": "bcomp-asm",
                 "scopeName": "source.asm",
-                "path": "./grammar/asm.json"
-            },
-            {
-                "language": "asm-list-file",
-                "scopeName": "source.asm.list",
-                "path": "./grammar/asm_list.json"
-            },
-            {
-                "language": "asm-markdown-codeblock",
-                "scopeName": "markdown.asm.codeblock",
-                "path": "./grammar/asm_markdown_codeblock.json",
-                "injectTo": [
-                    "text.html.markdown"
-                ]
+                "path": "./grammar/bcomp.json"
             },
             {
                 "language": "asm-list-markdown-codeblock",
@@ -264,7 +224,7 @@
         "problemMatchers": [
             {
                 "name": "problem-matcher-sjasmplus",
-                "owner": "asm-code-lens",
+                "owner": "bcomp-asm",
                 "fileLocation": [
                     "relative",
                     "${workspaceFolder}"
