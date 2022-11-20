@@ -11,7 +11,7 @@ It provides support for:
 - Outline view: View your labels (code, data, constants) in the outline view.
 - Rename symbols.
 - Code Lens: Above symbols it shows the number of references. You can click it to get to the references.
-- Command: asm-code-lens.find-labels-with-no-reference to find all labels that are not EQU and are not referenced. Useful to find dead code.
+- Command: bcomp-asm.find-labels-with-no-reference to find all labels that are not referenced. Useful to find dead code.
 - Supports for standard notation for labels (e.g. "label:").
 
 It supports the `.bcomp` extension
@@ -19,24 +19,6 @@ It supports the `.bcomp` extension
 ## Installation
 
 Install by extension package from [](https://github.com/mamsdeveloper/bcomp-asm/tree/master/releases).
-
-## Hexadecimal Calculator
-
-A view in the sidebar of the explorer and in debug mode.
-It adds a decimal and hexadecimal calculator to vscode.
-It always shows 2 columns: decimal and hexadecimal.
-If you enter a number in one column it is automatically converted to the other type.
-
-This way it is easily possible to mix calculations between decimal and hexadecimal.
-
-The calculator allows the basic integer calculations:
-- addition
-- subtraction
-- multiplication
-- division
-
-![](assets/hexcalculator.gif)
-
 
 ## Outline View
 
@@ -46,9 +28,6 @@ An outline view of the assembly can be shown like this:
 
 "Basic Computer Assembly" uses some heuristics to tell what labels are data, const or code.
 So be aware that it's decision might be wrong sometimes.
-
-Note: The outline view also supports sjasmplus MODULE information.
-
 
 ## Hovers in Debug Mode
 
