@@ -31,7 +31,7 @@
     "activationEvents": [
         "onStartupFinished"
     ],
-    "main": "./out/src/extension",
+    "main": "./out/extension",
     "contributes": {
         "views": {
             "explorer": [
@@ -204,6 +204,9 @@
                     "Bcomp Assembly"
                 ],
                 "configuration": "./language-configuration.json"
+            },
+            {
+                "id": "bcomp-markdown-codeblock"
             }
         ],
         "grammars": [
@@ -213,9 +216,9 @@
                 "path": "./grammar/bcomp.json"
             },
             {
-                "language": "asm-list-markdown-codeblock",
-                "scopeName": "markdown.asm.list.codeblock",
-                "path": "./grammar/asm_list_markdown_codeblock.json",
+                "language": "bcomp-markdown-codeblock",
+                "scopeName": "markdown.asm.codeblock",
+                "path": "./grammar/bcomp_markdown_codeblock.json",
                 "injectTo": [
                     "text.html.markdown"
                 ]
@@ -241,12 +244,15 @@
             }
         ]
     },
+    "vsce": {
+        "o": "release"
+    },
     "scripts": {
         "compile": "tsc -p ./",
         "tslint": "eslint ./**/*.ts",
         "watch": "tsc -w -p ./",
         "test": "mocha -u tdd 'out/**/*.tests.js'",
-        "package": "vsce package",
+        "package": "vsce package -o ./release/bcom-asm-0.0.1.vsix",
         "publish": "vsce publish"
     },
     "dependencies": {

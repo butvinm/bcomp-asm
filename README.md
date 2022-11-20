@@ -18,7 +18,7 @@ It supports the `.bcomp` extension
 
 ## Installation
 
-Install by extension package from [](https://github.com/mamsdeveloper/bcomp-asm/tree/master/releases).
+Install by extension package from [](https://github.com/mamsdeveloper/bcomp-asm/tree/master/release).
 
 ## Outline View
 
