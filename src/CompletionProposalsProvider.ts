@@ -281,7 +281,8 @@ export class CompletionProposalsProvider implements vscode.CompletionItemProvide
 			// Add the instruction proposals
 			let i = 0;
 			allCompletions = completions.map((text) => {
-				if (upperCase) text = text.toUpperCase();
+                if (upperCase) text = text.toUpperCase();
+                
 				const item = new vscode.CompletionItem(
 					text,
 					vscode.CompletionItemKind.Function
@@ -295,7 +296,7 @@ export class CompletionProposalsProvider implements vscode.CompletionItemProvide
 			allCompletions.push(...propList);
 		} else {
 			// Simply use grepped list.
-			allCompletions = propList;
+            allCompletions = propList;
 		}
 
 		// Return.
