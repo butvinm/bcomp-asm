@@ -84,18 +84,6 @@
 				{
 					"name": "constant.numeric.integer.hexadecimal.asm",
 					"match": "(\\-?0x[0-9a-fA-F]+)\\b"
-				},
-				{
-					"name": "constant.numeric.integer.binary.asm",
-					"match": "%[01]+\\b"
-				},
-				{
-					"name": "constant.numeric.integer.binary.asm",
-					"match": "\\b[01'_]+[bB]\\b"
-				},
-				{
-					"name": "constant.numeric.integer.decimal.asm",
-					"match": "\\-?\\d+"
 				}
 			]
 		},

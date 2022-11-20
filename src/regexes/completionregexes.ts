@@ -11,18 +11,14 @@ export class CompletionRegexes {
 	 * @param {labelsWithColons, labelsWithoutColons} Add regex with colons /
 	 * Add regex without colons
 	 */
-	public static regexesEveryLabelForWord(fuzzySearchWord: string, cfg: {labelsWithColons: boolean, labelsWithoutColons: boolean}, languageId: AllowedLanguageIds): RegExp[] {
+	public static regexesEveryLabelForWord(fuzzySearchWord: string, cfg: {labelsWithColons: boolean}, languageId: AllowedLanguageIds): RegExp[] {
 		const regexes: RegExp[] = [];
 		// Find all "some.thing:" (labels) in the document
 		if (cfg.labelsWithColons) {
 			const searchRegex = this.regexEveryLabelColonForWord(fuzzySearchWord, languageId);
 			regexes.push(searchRegex);
 		}
-		// Find all sjasmplus labels without ":" in the document
-		if (cfg.labelsWithoutColons && languageId == 'bcomp-asm') {
-			const searchRegex2 = this.regexEveryLabelWithoutColonForWord(fuzzySearchWord);
-			regexes.push(searchRegex2);
-		}
+
 		return regexes;
 	}
 

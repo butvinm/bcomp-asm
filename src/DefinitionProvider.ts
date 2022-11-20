@@ -1,6 +1,5 @@
 import { AllowedLanguageIds } from './languageId';
 import { CommonRegexes } from './regexes/commonregexes';
-import { DefinitionRegexes } from './regexes/definitionregexes';
 import * as vscode from 'vscode';
 import { grepMultiple, reduceLocations } from './grep';
 import {Config} from './config';
@@ -94,9 +93,6 @@ export class DefinitionProvider implements vscode.DefinitionProvider {
         // Find all sjasmplus MACROs in the document
         const searchSjasmMacro = CommonRegexes.regexMacroForWord(searchWord);
         regexes.push(searchSjasmMacro);
-        // Find all sjasmplus STRUCTs in the document
-        const searchSjasmStruct = DefinitionRegexes.regexStructForWord(searchWord);
-        regexes.push(searchSjasmStruct);
 
         const locations = await grepMultiple(regexes, this.config.rootFolder, document.languageId);
         const regexLbls = CommonRegexes.regexesLabel(this.config, languageId);

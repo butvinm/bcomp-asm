@@ -49,16 +49,8 @@ export class DocumentSymbolProvider implements vscode.DocumentSymbolProvider {
         const languageId = document.languageId as AllowedLanguageIds;
         let symbols = new Array<vscode.DocumentSymbol>();
         let regexLabel;
-        if (this.config.labelsWithColons && this.config.labelsWithoutColons)
-            regexLabel = DocSymbolRegexes.regexLabelWithAndWithoutColon(languageId);
-        else {
-            if (this.config.labelsWithColons)
-                regexLabel = DocSymbolRegexes.regexLabelWithColon(languageId);
-            else {
-                regexLabel = DocSymbolRegexes.regexLabelWithoutColon();
-            }
-        }
-
+        regexLabel = DocSymbolRegexes.regexLabelWithColon(languageId);
+        
         const regexModule = DocSymbolRegexes.regexModuleLabel();
         const regexStruct = DocSymbolRegexes.regexStructLabel();
         //const regexNotLabels = /^(include|if|endif|else|elif)$/i;

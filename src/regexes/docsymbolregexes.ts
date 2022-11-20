@@ -29,19 +29,6 @@ export class DocSymbolRegexes {
 
 
 	/**
-	 * Returns labels without a colon.
-	 * Capture groups for "@label:"
-	 * 1 = "@label"
-	 * 2 = "@label"
-	 * Note: there is no version for list files as labels without colons cannot be
-	 * safely determined.
-	 */
-	public static regexLabelWithoutColon(): RegExp {
-		return /^(@?[a-z_][\w\.]*)(?:\s|$)/i;
-	}
-
-
-	/**
 	 * Returns labels after MODULE and if MODULE or ENDMODULE was found.
 	 * Capture groups for " MODULE mod"
 	 * 1 = "MODULE mod"
