@@ -6,7 +6,13 @@
 			"include": "#comments"
 		},
 		{
-			"include": "#keywords"
+			"include": "#controls"
+		},
+		{
+			"include": "#registers"
+		},
+		{
+			"include": "#symbols"
 		},
 		{
 			"include": "#strings"
@@ -25,36 +31,40 @@
 		"comments": {
 			"patterns": [
 				{
-					"name": "comment.line.asm",
+					"name": "comment.line.bcomp",
 					"begin": ";",
 					"end": "\\n"
 				}
 			]
 		},
-		"keywords": {
+		"symbols": {
 			"patterns": [
 				{
-					"name": "keyword.control.asm",
-					"match": "\\b(?:WORD|DUP|ORG|END)\\b"
+					"name": "keyword.symbol.bcomp",
+					"match": "(?:\\$|\\+|\\-|\\&|\\#|\\?)"
 				}
 			]
 		},
-		"strings": {
+		"registers": {
 			"patterns": [
 				{
-					"match": "(?i:(af'))",
-					"captures": {
-						"1": {
-							"name": "support.type.register.asm"
-						}
-					}
+					"name": "storage.type.register.bcomp",
+					"match": "\\b(?:SP|IP|AC|BR|AR|DR|IP|CR|IR)\\b"
+				}
+			]
+		},
+		"controls": {
+			"patterns": [
+				{
+					"name": "support.function.bcomp",
+					"match": "\\b(?:START|WORD|DUP|ORG|END)\\b"
 				}
 			]
 		},
 		"string-character-escape": {
 			"patterns": [
 				{
-					"name": "constant.character.escape.asm",
+					"name": "constant.character.escape.bcomp",
 					"match": "\\\\(x[0-9A-Fa-f]{2}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.|$)"
 				}
 			]
@@ -62,7 +72,7 @@
 		"mnemonics": {
 			"patterns": [
 				{
-					"name": "keyword.mnemonic.bcomp.asm",
+					"name": "keyword.mnemonic.bcomp",
 					"match": "\\s(?i:AND|OR|ADD|ADC|SUB|CMP|LOOP|LD|SWAM|JUMP|CALL|ST|NOP|HLT|CLA|NOT|CLC|CMC|ROL|ROR|ASL|ASR|SXTB|SWAB|INC|DEC|NEG|POP|POPF|RET|IRET|PUSH|PUSHF|SWAP|BEQ|BNE|BMI|BPL|BCS|BCC|BVS|BVC|BLT|BGE|BR|DI|EI|IN|OUT|INT)\\s"
 				}
 			]
@@ -74,16 +84,32 @@
 					"match": "^\\{5}"
 				},
 				{
-					"name": "constant.numeric.integer.hexadecimal.asm",
+					"name": "constant.numeric.integer.hexadecimal.bcomp",
 					"match": "[\\$#][0-9a-fA-F]+"
 				},
 				{
-					"name": "constant.numeric.integer.hexadecimal.asm",
+					"name": "constant.numeric.integer.hexadecimal.bcomp",
 					"match": "(\\-?[0-9a-fA-F]+[hH])\\b"
 				},
 				{
-					"name": "constant.numeric.integer.hexadecimal.asm",
+					"name": "constant.numeric.integer.hexadecimal.bcomp",
 					"match": "(\\-?0x[0-9a-fA-F]+)\\b"
+				},
+				{
+					"name": "constant.numeric.integer.decimal.bcomp",
+					"match": "\\-?\\d+"
+				}
+			]
+		},
+		"strings": {
+			"patterns": [
+				{
+					"match": "(?i:(af'))",
+					"captures": {
+						"1": {
+							"name": "support.type.register.bcomp"
+						}
+					}
 				}
 			]
 		},
@@ -91,10 +117,10 @@
 			"patterns": [
 				{
 					"match": "(\\@?(\\.?[a-zA-Z_]\\w*)+)",
-					"name": "variable.parameter.label.asm"
+					"name": "entity.name.function.label.bcomp"
 				}
 			]
 		}
 	},
-	"scopeName": "source.asm"
+	"scopeName": "source.bcomp"
 }

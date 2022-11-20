@@ -201,7 +201,7 @@
         "grammars": [
             {
                 "language": "bcomp-asm",
-                "scopeName": "source.asm",
+                "scopeName": "source.bcomp",
                 "path": "./grammar/bcomp.json"
             },
             {

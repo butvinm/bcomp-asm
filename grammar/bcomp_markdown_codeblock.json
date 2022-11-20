@@ -34,7 +34,7 @@
 					"contentName": "meta.embedded.block.asm",
 					"patterns": [
 						{
-							"include": "source.asm"
+							"include": "source.bcomp"
 						}
 					]
 				}
