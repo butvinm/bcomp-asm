@@ -10,13 +10,10 @@ import {CompletionProposalsProvider} from './CompletionProposalsProvider';
 import {Commands} from './Commands';
 import {setGrepGlobPatterns} from './grep';
 import {setCustomCommentPrefix} from './comments';
-import {HexCalcProvider} from './HexCalcProvider';
 import {WhatsNewView} from './whatsnew/whatsnewview';
 import {PackageInfo} from './whatsnew/packageinfo';
 import {GlobalStorage} from './globalstorage';
-import {getLabelsConfig} from './config';
-import {DonateInfo} from './donate/donateinfo';
-
+import {getConfig} from './config';
 
 
 export function activate(context: vscode.ExtensionContext) {
@@ -27,25 +24,12 @@ export function activate(context: vscode.ExtensionContext) {
     // Init global storage
     GlobalStorage.Init(context);
 
-    // Check version for donate info
-    DonateInfo.checkVersion();
-
     // Check version and show 'What's new' if necessary.
     const mjrMnrChanged = WhatsNewView.updateVersion();
     if (mjrMnrChanged) {
         // Major or minor version changed so show the whatsnew page.
         new WhatsNewView(); // NOSONAR
     }
-
-    // Register the hex calculator webviews
-    hexCalcExplorerProvider = new HexCalcProvider();
-    context.subscriptions.push(
-        vscode.window.registerWebviewViewProvider("bcomp-asm.calcview-explorer", hexCalcExplorerProvider, {webviewOptions: {retainContextWhenHidden: true}})
-    );
-    hexCalcDebugProvider = new HexCalcProvider();
-    context.subscriptions.push(
-        vscode.window.registerWebviewViewProvider("bcomp-asm.calcview-debug", hexCalcDebugProvider, {webviewOptions: {retainContextWhenHidden: true}})
-    );
 
     // Enable logging.
     configure(context);
@@ -77,7 +61,7 @@ function findLabelsWithNoReferenceAllRootFolders() {
     const editorPath =editor.document.uri.fsPath;
     // Get all workspace folders
     const wsFolders = (vscode.workspace.workspaceFolders || []).map(ws => ws.uri.fsPath + path.sep);
-    const config = getLabelsConfig();
+    const config = getConfig();
     // Check in which workspace folder the path is included
     for (const rootFolder of wsFolders) {
         if (editorPath.includes(rootFolder)) {
@@ -105,20 +89,6 @@ function configure(context: vscode.ExtensionContext, event?: vscode.Configuratio
     // Get all workspace folders
     const wsFolders = (vscode.workspace.workspaceFolders || []).map(ws => ws.uri.fsPath + path.sep);
 
-    // Check for the hex calculator params
-    if (event) {
-        if (event.affectsConfiguration('bcomp-asm.hexCalculator.hexPrefix')
-            || event.affectsConfiguration('bcomp-asm.donated')) {
-            // Update the hex calculators
-            if (hexCalcExplorerProvider)
-                hexCalcExplorerProvider.setMainHtml();
-            if (hexCalcDebugProvider)
-                hexCalcDebugProvider.setMainHtml();
-            // Update the donate info
-            DonateInfo.donatedPreferencesChanged();
-        }
-    }
-
     // Dispose (remove) all providers
     for (const rootFolder of wsFolders) {
         // Deregister
@@ -144,7 +114,7 @@ function configure(context: vscode.ExtensionContext, event?: vscode.Configuratio
     setGrepGlobPatterns(settings.excludeFiles);
 
     // Get some settings.
-    const configWoRoot = getLabelsConfig();
+    const configWoRoot = getConfig();
 
 
     // Both "languages": asm files and list files.
@@ -213,7 +183,7 @@ function configure(context: vscode.ExtensionContext, event?: vscode.Configuratio
 
 
     // Toggle line Comment configuration
-    const toggleCommentPrefix = settings.get<string>("comments.toggleLineCommentPrefix") || ';';
+    const toggleCommentPrefix = ';';
     vscode.languages.setLanguageConfiguration("bcomp-asm", {comments: {lineComment: toggleCommentPrefix}});
     // Store
     setCustomCommentPrefix(toggleCommentPrefix);
@@ -233,8 +203,6 @@ function removeProvider(pv: vscode.Disposable|undefined, context: vscode.Extensi
 }
 
 
-let hexCalcExplorerProvider;
-let hexCalcDebugProvider;
 let regCodeLensProviders = new Map<string, vscode.Disposable>();
 let regHoverProviders = new Map<string, vscode.Disposable>();
 let regCompletionProposalsProviders = new Map<string, vscode.Disposable>();

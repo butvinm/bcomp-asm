@@ -3,8 +3,6 @@ import { CommonRegexes } from './regexes/commonregexes';
 import * as vscode from 'vscode';
 import {grep, grepTextDocumentMultiple, reduceLocations} from './grep';
 import {Config} from './config';
-import {DonateInfo} from './donate/donateinfo';
-
 
 
 /**
@@ -56,9 +54,6 @@ export class CodeLensProvider implements vscode.CodeLensProvider {
      * @param token
      */
     public async provideCodeLenses(document: vscode.TextDocument, token: vscode.CancellationToken): Promise<vscode.CodeLens[]> {
-        // Show donate info
-        DonateInfo.checkDonateInfo();   // No need for 'await'.
-
         // Find all code lenses
         const languageId = document.languageId as AllowedLanguageIds;
         const codeLenses: Array<vscode.CodeLens> = [];

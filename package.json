@@ -33,28 +33,6 @@
     ],
     "main": "./out/extension",
     "contributes": {
-        "views": {
-            "explorer": [
-                {
-                    "type": "webview",
-                    "id": "bcomp-asm.calcview-explorer",
-                    "name": "Hexadecimal Calculator",
-                    "icon": "assets/hexcalc_icon.svg",
-                    "contextualTitle": "Hex Calculator",
-                    "when": "config.bcomp-asm.hexCalculator.showInExplorer"
-                }
-            ],
-            "debug": [
-                {
-                    "type": "webview",
-                    "id": "bcomp-asm.calcview-debug",
-                    "name": "Hexadecimal Calculator",
-                    "icon": "assets/hexcalc_icon.svg",
-                    "contextualTitle": "Hex Calculator",
-                    "when": "config.bcomp-asm.hexCalculator.showInDebug"
-                }
-            ]
-        },
         "configuration": {
             "type": "object",
             "title": "bcomp-asm configuration",
@@ -112,52 +90,6 @@
                     "type": "string",
                     "default": "",
                     "markdownDescription": "Choose what files or directories to exclude e.g `**/*.{inc,s}`."
-                },
-                "bcomp-asm.hexCalculator.showInExplorer": {
-                    "scope": "window",
-                    "markdownDescription": "Set to false to disable calculator in explorer view.",
-                    "type": "boolean",
-                    "default": true
-                },
-                "bcomp-asm.hexCalculator.showInDebug": {
-                    "scope": "window",
-                    "markdownDescription": "Set to false to disable calculator in debug view.",
-                    "type": "boolean",
-                    "default": true
-                },
-                "bcomp-asm.hexCalculator.hexPrefix": {
-                    "scope": "window",
-                    "markdownDescription": "The prefix to use for hex values, e.g. `0x` or `$`",
-                    "type": "string",
-                    "default": "0x"
-                },
-                "bcomp-asm.donated": {
-                    "scope": "window",
-                    "markdownDescription": "If you donated (press the `Donate...` button in hex calculator to do so) you can hide the button by setting this parameter.",
-                    "type": "boolean",
-                    "default": false
-                },
-                "bcomp-asm.comments.toggleLineCommentPrefix": {
-                    "scope": "window",
-                    "markdownDescription": "Configure the prefix used when toggling the line comment.",
-                    "type": "string",
-                    "default": ";"
-                },
-                "bcomp-asm.labels.colon": {
-                    "scope": "window",
-                    "markdownDescription": "Determines if labels with or without or both should be recognized.\nPlease note: labels without colons cannot be determined in list files.",
-                    "type": "string",
-                    "enum": [
-                        "Both",
-                        "With colon",
-                        "Without colon"
-                    ],
-                    "enumDescriptions": [
-                        "Labels with and without a trailing colon",
-                        "Only labels with a trailing colon",
-                        "Only labels without a trailing colon"
-                    ],
-                    "default": "Both"
                 },
                 "bcomp-asm.labels.excludes": {
                     "scope": "window",
