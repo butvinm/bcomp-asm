@@ -13,8 +13,6 @@ export class DocSymbolRegexes {
 	 * 2 = "@label"
 	 */
 	public static regexLabelWithAndWithoutColon(languageId: AllowedLanguageIds): RegExp {
-		if (languageId == 'asm-list-file')
-			return DocSymbolRegexes.regexLabelWithColon(languageId);	// Only with colon
 		return /^((@?[a-z_][\w\.]*):?)/i;
 	}
 
@@ -26,8 +24,6 @@ export class DocSymbolRegexes {
 	 * 2 = "@label"
 	 */
 	public static regexLabelWithColon(languageId: AllowedLanguageIds): RegExp {
-		if (languageId == 'asm-list-file')
-			return /^[^#].*\s((@?[a-z_][\w\.]*):)/i;	// Only with colon
 		return /^((@?[a-z_][\w\.]*):)/i;
 	}
 

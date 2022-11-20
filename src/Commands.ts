@@ -8,7 +8,7 @@ import {CommandsRegexes} from './regexes/commandsregexes';
 
 
 /// Output to the vscode "OUTPUT" tab.
-let output = vscode.window.createOutputChannel("ASM Code Lens");
+let output = vscode.window.createOutputChannel("Basic Computer Assembly");
 
 
 /**
@@ -44,8 +44,7 @@ export class Commands {
      */
     protected static async findLabels(locLabels, cfg: Config, languageId: AllowedLanguageIds): Promise<void> {
         const baseName = path.basename(cfg.rootFolder);
-        const typename = (languageId == 'asm-list-file') ? 'list' : 'asm';
-        output.appendLine("Unreferenced labels for " + typename + " files, " + baseName + ":");
+        output.appendLine("Unreferenced labels for asm files, " + baseName + ":");
         output.show(true);
 
         try {
@@ -82,7 +81,7 @@ export class Commands {
                 if (count == 0) {
                     // No reference
                     unrefLabels++;
-                    output.appendLine(label + ", file://" + fileName + "#" + (pos.line + 1));
+                    output.appendLine(label + ", file://" + fileName + ":" + (pos.line + 1));
                 }
                 // Check for last search
                 labelsCount--;

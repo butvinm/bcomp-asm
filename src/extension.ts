@@ -36,18 +36,15 @@ export function activate(context: vscode.ExtensionContext) {
         // Major or minor version changed so show the whatsnew page.
         new WhatsNewView(); // NOSONAR
     }
-    // Register the additional command to view the "Whats' New" page.
-    context.subscriptions.push(vscode.commands.registerCommand("asm-code-lens.whatsNew", () => new WhatsNewView()));
-
 
     // Register the hex calculator webviews
     hexCalcExplorerProvider = new HexCalcProvider();
     context.subscriptions.push(
-        vscode.window.registerWebviewViewProvider("asm-code-lens.calcview-explorer", hexCalcExplorerProvider, {webviewOptions: {retainContextWhenHidden: true}})
+        vscode.window.registerWebviewViewProvider("bcomp-asm.calcview-explorer", hexCalcExplorerProvider, {webviewOptions: {retainContextWhenHidden: true}})
     );
     hexCalcDebugProvider = new HexCalcProvider();
     context.subscriptions.push(
-        vscode.window.registerWebviewViewProvider("asm-code-lens.calcview-debug", hexCalcDebugProvider, {webviewOptions: {retainContextWhenHidden: true}})
+        vscode.window.registerWebviewViewProvider("bcomp-asm.calcview-debug", hexCalcDebugProvider, {webviewOptions: {retainContextWhenHidden: true}})
     );
 
     // Enable logging.
@@ -59,10 +56,11 @@ export function activate(context: vscode.ExtensionContext) {
     }));
 
     // Register commands.
-    vscode.commands.registerCommand('asm-code-lens.find-labels-with-no-reference', () => {
+    context.subscriptions.push(vscode.commands.registerCommand('bcomp-asm.find-labels-with-no-reference', () => {
         findLabelsWithNoReferenceAllRootFolders();
-    });
+    }));
 }
+
 
 
 /**
@@ -74,7 +72,7 @@ function findLabelsWithNoReferenceAllRootFolders() {
     if (!editor)
         return;
     const languageId = editor.document.languageId;
-    if (languageId != 'asm-collection' && languageId != 'asm-list-file')
+    if (languageId != 'bcomp-asm')
         return;
     const editorPath =editor.document.uri.fsPath;
     // Get all workspace folders
@@ -109,8 +107,8 @@ function configure(context: vscode.ExtensionContext, event?: vscode.Configuratio
 
     // Check for the hex calculator params
     if (event) {
-        if (event.affectsConfiguration('asm-code-lens.hexCalculator.hexPrefix')
-            || event.affectsConfiguration('asm-code-lens.donated')) {
+        if (event.affectsConfiguration('bcomp-asm.hexCalculator.hexPrefix')
+            || event.affectsConfiguration('bcomp-asm.donated')) {
             // Update the hex calculators
             if (hexCalcExplorerProvider)
                 hexCalcExplorerProvider.setMainHtml();
@@ -151,8 +149,7 @@ function configure(context: vscode.ExtensionContext, event?: vscode.Configuratio
 
     // Both "languages": asm files and list files.
     const asmListFiles: vscode.DocumentSelector = [
-        {scheme: "file", language: 'asm-collection'},
-        {scheme: "file", language: 'asm-list-file'}
+        {scheme: "file", language: 'bcomp-asm'}
     ];
 
     // Multiroot: do for all root folders:
@@ -217,7 +214,7 @@ function configure(context: vscode.ExtensionContext, event?: vscode.Configuratio
 
     // Toggle line Comment configuration
     const toggleCommentPrefix = settings.get<string>("comments.toggleLineCommentPrefix") || ';';
-    vscode.languages.setLanguageConfiguration("asm-collection", {comments: {lineComment: toggleCommentPrefix}});
+    vscode.languages.setLanguageConfiguration("bcomp-asm", {comments: {lineComment: toggleCommentPrefix}});
     // Store
     setCustomCommentPrefix(toggleCommentPrefix);
 }

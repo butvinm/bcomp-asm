@@ -17,14 +17,11 @@ export class CommonRegexes {
      *  1 = preceding spaces (and other chars in case of list file)
      *  2 = the label itself e.g. "init.label_1
      * Used by findLabelsWithNoReference, provideCodeLenses.
-	 * @param languageId either "asm-collection" or "asm-list-file".
+	 * @param languageId either "bcomp-asm" or "asm-list-file".
 	 * A different regex is returned dependent on languageId.
      */
     public static regexLabelColon(languageId: AllowedLanguageIds): RegExp {
-        if (languageId == 'asm-list-file') {
-            return new RegexIndexOf(':', /(^[^#]*\s@?)([a-z_][\w\.]*):/i);
-        }
-		// "asm-collection"
+		// "bcomp-asm"
         return /(^@?)\b([a-z_][\w\.]*):/i;
     }
 
@@ -49,7 +46,7 @@ export class CommonRegexes {
      * Returns an array of regexes with 1 or 2 regexes.
      * @param labelsWithColons Add regex with colons
      * @param labelsWithoutColons Add regex without colons
-	 * @param languageId either "asm-collection" or "asm-list-file".
+	 * @param languageId either "bcomp-asm" or "asm-list-file".
 	 * A different regex is returned dependent on languageId.
      */
     public static regexesLabel(cfg: {labelsWithColons: boolean, labelsWithoutColons: boolean}, languageId: AllowedLanguageIds): RegExp[] {
@@ -60,7 +57,7 @@ export class CommonRegexes {
             regexes.push(searchRegex);
         }
         // Find all sjasmplus labels without ":" in the document
-        if (cfg.labelsWithoutColons && languageId == "asm-collection") {
+        if (cfg.labelsWithoutColons && languageId == "bcomp-asm") {
             const searchRegex2 = CommonRegexes.regexLabelWithoutColon();
             regexes.push(searchRegex2);
         }
@@ -126,14 +123,11 @@ export class CommonRegexes {
      * Capture groups:
      *  1 = preceding characters before 'searchWord'.
      * Used by DefinitionProvider.
-	 * @param languageId either "asm-collection" or "asm-list-file".
+	 * @param languageId either "bcomp-asm" or "asm-list-file".
 	 * A different regex is returned dependent on languageId.
      */
     public static regexLabelColonForWord(searchWord: string, languageId: AllowedLanguageIds): RegExp {
-        if (languageId == 'asm-list-file') {
-            return new RegexTwo(new RegExp(searchWord, 'i'), new RegExp('^(.*?\\s)([[a-zA-Z_\\.][\\w\\.]*)?\\b' + searchWord + ':'));
-        }
-		// "asm-collection"
+		// "bcomp-asm"
         return new RegExp('^()([a-zA-Z_\\.][\\w\\.]*)?\\b' + searchWord + ':');
     }
 
@@ -154,7 +148,7 @@ export class CommonRegexes {
      * Returns an array of regexes with 1 or 2 regexes.
      * @param labelsWithColons Add regex with colons
      * @param labelsWithoutColons Add regex without colons
-	 * @param languageId either "asm-collection" or "asm-list-file".
+	 * @param languageId either "bcomp-asm" or "asm-list-file".
 	 * A different regex is returned dependent on languageId.
      */
     public static regexesLabelForWord(searchWord: string, cfg: {labelsWithColons: boolean, labelsWithoutColons: boolean}, languageId: AllowedLanguageIds): RegExp[] {
@@ -165,7 +159,7 @@ export class CommonRegexes {
             regexes.push(searchRegex);
         }
         // Find all sjasmplus labels without ":" in the document
-        if (cfg.labelsWithoutColons && languageId == 'asm-collection') {
+        if (cfg.labelsWithoutColons && languageId == 'bcomp-asm') {
             const searchRegex2 = CommonRegexes.regexLabelWithoutColonForWord(searchWord);
             regexes.push(searchRegex2);
         }

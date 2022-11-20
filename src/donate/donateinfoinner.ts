@@ -89,7 +89,7 @@ export class DonateInfoInner {
 
 	/**
 	 * Override for unit tests or by real 'get' function.
-	 * @returns Returns the state of the 'donated' flag in the asm-code-lens preferences.
+	 * @returns Returns the state of the 'donated' flag in the bcomp-asm preferences.
 	 */
 	protected static getDonatedPref(): boolean {
 		// Override

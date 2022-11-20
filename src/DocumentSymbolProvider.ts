@@ -55,8 +55,6 @@ export class DocumentSymbolProvider implements vscode.DocumentSymbolProvider {
             if (this.config.labelsWithColons)
                 regexLabel = DocSymbolRegexes.regexLabelWithColon(languageId);
             else {
-                if (languageId == 'asm-list-file')
-                    return undefined as any; // In list files labels without colons are not supported.
                 regexLabel = DocSymbolRegexes.regexLabelWithoutColon();
             }
         }

@@ -68,7 +68,7 @@ export class DonateInfo extends DonateInfoInner {
 
 
 	/**
-	 * @returns Returns the state of the 'donated' flag in the asm-code-lens preferences.
+	 * @returns Returns the state of the 'donated' flag in the bcomp-asm preferences.
 	 */
 	protected static getDonatedPref(): boolean {
 		// Get donated state

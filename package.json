@@ -169,11 +169,6 @@
         },
         "commands": [
             {
-                "command": "bcomp-asm.whatsNew",
-                "title": "Show 'What's New' page of this bcomp-asm release.",
-                "category": "bcomp-asm"
-            },
-            {
                 "command": "bcomp-asm.find-labels-with-no-reference",
                 "title": "Find Labels with no Reference",
                 "category": "bcomp-asm"
@@ -185,12 +180,6 @@
                     "when": "resourceLangId == bcomp-asm",
                     "command": "bcomp-asm.find-labels-with-no-reference",
                     "group": "0_navigation@10"
-                }
-            ],
-            "commandPalette": [
-                {
-                    "command": "bcomp-asm.find-labels-with-no-reference",
-                    "when": "false"
                 }
             ]
         },
