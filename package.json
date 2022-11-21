@@ -1,7 +1,7 @@
 {
     "name": "bcomp-asm",
     "displayName": "Basic Computer Assembly",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "publisher": "mamsdeveloper",
     "description": "A vscode language server that enables highlighting and completion for Basic Computer assembly files.",
     "author": {
@@ -10,6 +10,7 @@
     "license": "MIT",
     "keywords": [
         "bcomp-asm",
+        "basm",
         "assembler",
         "bcomp"
     ],
@@ -119,7 +120,9 @@
             {
                 "id": "bcomp-asm",
                 "extensions": [
-                    ".bcomp"
+                    ".bcomp",
+                    ".basm",
+                    ".BASM"
                 ],
                 "aliases": [
                     "Bcomp Assembly"
@@ -173,7 +176,7 @@
         "tslint": "eslint ./**/*.ts",
         "watch": "tsc -w -p ./",
         "test": "mocha -u tdd 'out/**/*.tests.js'",
-        "package": "vsce package -o ./release/bcom-asm-1.0.0.vsix",
+        "package": "vsce package -o ./release/bcom-asm-1.1.0.vsix",
         "publish": "vsce publish"
     },
     "dependencies": {

@@ -218,7 +218,7 @@ export class CompletionProposalsProvider implements vscode.CompletionItemProvide
 
 		// Go through all found locations
 		for (const loc of reducedLocations) {
-			const text = loc.moduleLabel;
+            const text = loc.moduleLabel;
 			if (this.config.labelsExcludes.includes(text)) continue; // Skip if excluded
 			/*
             Alternative implementation that only proposes completion up to the next dot:
