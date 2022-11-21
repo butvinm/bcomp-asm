@@ -38,3 +38,5 @@ This extension made use of 4 other packages:
 - [vscode-whats-new](https://github.com/alefragnani/vscode-whats-new) project from Alessandro Fragnani aka [alefragni](https://github.com/alefragnani), MIT License
 
 Many thanks to the authors.
+
+
