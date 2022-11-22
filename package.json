@@ -80,12 +80,6 @@
                     "default": true,
                     "markdownDescription": "Enable/disable 'Find All References'."
                 },
-                "bcomp-asm.enableRenaming": {
-                    "scope": "window",
-                    "type": "boolean",
-                    "default": true,
-                    "markdownDescription": "Enable/disable the possibility to rename labels. You need to reload the extension to take effect."
-                },
                 "bcomp-asm.excludeFiles": {
                     "scope": "window",
                     "type": "string",

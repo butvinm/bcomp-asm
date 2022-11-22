@@ -4,7 +4,6 @@ import {ReferenceProvider} from './ReferenceProvider';
 import {DefinitionProvider} from './DefinitionProvider';
 import {HoverProvider} from './HoverProvider';
 import {CodeLensProvider} from './CodeLensProvider';
-import {RenameProvider} from './RenameProvider';
 import {DocumentSymbolProvider} from './DocumentSymbolProvider';
 import {CompletionProposalsProvider} from './CompletionProposalsProvider';
 import {Commands} from './Commands';
@@ -97,7 +96,6 @@ function configure(context: vscode.ExtensionContext, event?: vscode.Configuratio
         removeProvider(regCompletionProposalsProviders.get(rootFolder), context);
         removeProvider(regDefinitionProviders.get(rootFolder), context);
         removeProvider(regReferenceProviders.get(rootFolder), context);
-        removeProvider(regRenameProviders.get(rootFolder), context);
         removeProvider(regDocumentSymbolProviders.get(rootFolder), context);
 
     }
@@ -106,7 +104,6 @@ function configure(context: vscode.ExtensionContext, event?: vscode.Configuratio
     regCompletionProposalsProviders.clear();
     regDefinitionProviders.clear();
     regReferenceProviders.clear();
-    regRenameProviders.clear();
     regDocumentSymbolProviders.clear();
 
 
@@ -166,13 +163,6 @@ function configure(context: vscode.ExtensionContext, event?: vscode.Configuratio
             context.subscriptions.push(provider);
         }
 
-        if (settings.enableRenaming) {
-            // Register
-            const provider = vscode.languages.registerRenameProvider(asmListFiles, new RenameProvider(config));
-            regRenameProviders.set(rootFolder, provider);
-            context.subscriptions.push(provider);
-        }
-
         if (settings.enableOutlineView) {
             // Register
             const provider = vscode.languages.registerDocumentSymbolProvider(asmListFiles, new DocumentSymbolProvider(config));
@@ -208,7 +198,6 @@ let regHoverProviders = new Map<string, vscode.Disposable>();
 let regCompletionProposalsProviders = new Map<string, vscode.Disposable>();
 let regDefinitionProviders = new Map<string, vscode.Disposable>();
 let regReferenceProviders = new Map<string, vscode.Disposable>();
-let regRenameProviders = new Map<string, vscode.Disposable>();
 let regDocumentSymbolProviders = new Map<string, vscode.Disposable>();
 
 
