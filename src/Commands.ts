@@ -81,7 +81,9 @@ export class Commands {
                 if (count == 0) {
                     // No reference
                     unrefLabels++;
-                    output.appendLine(label + ", file:///" + fileName + "#" + (pos.line + 1));
+                    const filePath = fileName + ":" + (pos.line + 1);
+                    const fileUri = "file://" + fileName + "#" + (pos.line + 1); 
+                    output.appendLine(label + ', ' +  filePath + " (" + fileUri + ")");
                 }
                 
                 // Check for last search
@@ -102,3 +104,4 @@ export class Commands {
     }
 
 }
+
