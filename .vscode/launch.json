@@ -9,7 +9,7 @@
             "runtimeExecutable": "${execPath}",
             "args": ["--extensionDevelopmentPath=${workspaceFolder}" ],
             "sourceMaps": true,
-            "outFiles": [ "${workspaceFolder}/out/src/**/*.js" ]
+            "outFiles": [ "${workspaceFolder}/out/src/**/*.js" ],
         },
         {
             "name": "Launch Tests",

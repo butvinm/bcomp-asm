@@ -1,7 +1,7 @@
 {
     "name": "bcomp-asm",
     "displayName": "Basic Computer Assembly",
-    "version": "1.1.0",
+    "version": "2.0.0",
     "publisher": "mamsdeveloper",
     "description": "A vscode language server that enables highlighting and completion for Basic Computer assembly files.",
     "author": {
@@ -32,84 +32,26 @@
     "activationEvents": [
         "onStartupFinished"
     ],
-    "main": "./out/extension",
+    "main": "./out/package/extension",
     "contributes": {
         "configuration": {
             "type": "object",
             "title": "bcomp-asm configuration",
-            "properties": {
-                "bcomp-asm.enableOutlineView": {
-                    "scope": "window",
-                    "type": "boolean",
-                    "default": true,
-                    "markdownDescription": "Enable/disable outline view for the active document."
-                },
-                "bcomp-asm.enableCodeLenses": {
-                    "scope": "window",
-                    "type": "boolean",
-                    "default": true,
-                    "markdownDescription": "Enable/disable the display of code lenses (references) above labels."
-                },
-                "bcomp-asm.enableHovering": {
-                    "scope": "window",
-                    "type": "boolean",
-                    "default": true,
-                    "markdownDescription": "Enable/disable the of showing information while hovering labels etc."
-                },
-                "bcomp-asm.enableCompletions": {
-                    "scope": "window",
-                    "type": "boolean",
-                    "default": true,
-                    "markdownDescription": "Enable/disable symbol input completion."
-                },
-                "bcomp-asm.completionsRequiredLength": {
-                    "scope": "window",
-                    "type": "number",
-                    "default": 1,
-                    "markdownDescription": "The number of characters required before completion proposals will be presented."
-                },
-                "bcomp-asm.enableGotoDefinition": {
-                    "scope": "window",
-                    "type": "boolean",
-                    "default": true,
-                    "markdownDescription": "Enable/disable 'Go to Type Definition'. You need to reload the extension to take effect."
-                },
-                "bcomp-asm.enableFindAllReferences": {
-                    "scope": "window",
-                    "type": "boolean",
-                    "default": true,
-                    "markdownDescription": "Enable/disable 'Find All References'."
-                },
-                "bcomp-asm.excludeFiles": {
-                    "scope": "window",
-                    "type": "string",
-                    "default": "",
-                    "markdownDescription": "Choose what files or directories to exclude e.g `**/*.{inc,s}`."
-                },
-                "bcomp-asm.labels.excludes": {
-                    "scope": "window",
-                    "markdownDescription": "Configure here a comma separated list of words that should not be recognized as labels. E.g. if bcomp-asm wrongly interprets an assembler directive as label you can exclude it here. For example `if;then;else;elif;endif`. The exclude is case-insensitive.",
-                    "type": "string",
-                    "default": ""
-                }
-            }
+            "properties": {}
         },
         "commands": [
             {
-                "command": "bcomp-asm.find-labels-with-no-reference",
-                "title": "Find Labels with no Reference",
+                "command": "bcomp-asm.parse-asm",
+                "title": "Parse assembly",
+                "category": "bcomp-asm"
+            },
+            {
+                "command": "bcomp-asm.find-unused-labels",
+                "title": "Find unused labels",
                 "category": "bcomp-asm"
             }
         ],
-        "menus": {
-            "editor/context": [
-                {
-                    "when": "resourceLangId == bcomp-asm",
-                    "command": "bcomp-asm.find-labels-with-no-reference",
-                    "group": "0_navigation@10"
-                }
-            ]
-        },
+        "menus": {},
         "languages": [
             {
                 "id": "bcomp-asm",
@@ -124,40 +66,21 @@
                 "configuration": "./language-configuration.json"
             },
             {
-                "id": "bcomp-markdown-codeblock"
+                "id": "basm-markdown-codeblock"
             }
         ],
         "grammars": [
             {
                 "language": "bcomp-asm",
-                "scopeName": "source.bcomp",
-                "path": "./grammar/bcomp.json"
+                "scopeName": "source.basm",
+                "path": "./grammar/basm.json"
             },
             {
-                "language": "bcomp-markdown-codeblock",
+                "language": "basm-markdown-codeblock",
                 "scopeName": "markdown.asm.codeblock",
-                "path": "./grammar/bcomp_markdown_codeblock.json",
+                "path": "./grammar/basm_markdown_codeblock.json",
                 "injectTo": [
                     "text.html.markdown"
-                ]
-            }
-        ],
-        "problemMatchers": [
-            {
-                "name": "problem-matcher-sjasmplus",
-                "owner": "bcomp-asm",
-                "fileLocation": [
-                    "relative",
-                    "${workspaceFolder}"
-                ],
-                "pattern": [
-                    {
-                        "regexp": "^(.*)\\((\\d+)\\):\\s+(warning|error):\\s+(.*)$",
-                        "file": 1,
-                        "line": 2,
-                        "severity": 3,
-                        "message": 4
-                    }
                 ]
             }
         ]
@@ -170,10 +93,12 @@
         "tslint": "eslint ./**/*.ts",
         "watch": "tsc -w -p ./",
         "test": "mocha -u tdd 'out/**/*.tests.js'",
-        "package": "vsce package -o ./release/bcom-asm-1.1.0.vsix",
-        "publish": "vsce publish"
+        "package": "vsce package -o ./release/bcom-asm-2.0.0.vsix",
+        "publish": "vsce publish",
+        "antlr4ts": "antlr4ts -o ./src/parser grammar/basm.g4"
     },
     "dependencies": {
+        "antlr4ts": "^0.5.0-alpha.4",
         "assert": "^2.0.0",
         "fast-glob": "^3.2.11",
         "fs-extra": "^10.0.1",
@@ -185,6 +110,7 @@
         "@types/mocha": "^9.1.0",
         "@types/node": "^17.0.21",
         "@types/vscode": "^1.65.0",
+        "antlr4ts-cli": "^0.5.0-alpha.4",
         "mocha": "^9.2.2",
         "source-map-support": "^0.5.21",
         "typescript": "^4.6.2"

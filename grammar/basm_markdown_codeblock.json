@@ -3,11 +3,11 @@
 	"injectionSelector": "L:text.html.markdown",
 	"patterns": [
 		{
-			"include": "#bcomp-markdown-codeblock"
+			"include": "#basm-markdown-codeblock"
 		}
 	],
 	"repository": {
-		"bcomp-markdown-codeblock": {
+		"basm-markdown-codeblock": {
 			"begin": "(^|\\G)(\\s*)(\\`{3,}|~{3,})\\s*(?i:(bcomp)(\\s+[^`~]*)?$)",
 			"name": "markup.fenced_code.block.markdown",
 			"end": "(^|\\G)(\\2|\\s{0,3})(\\3)\\s*$",
@@ -34,7 +34,7 @@
 					"contentName": "meta.embedded.block.asm",
 					"patterns": [
 						{
-							"include": "source.bcomp"
+							"include": "source.basm"
 						}
 					]
 				}
