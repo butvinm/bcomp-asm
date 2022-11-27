@@ -6,6 +6,7 @@ import { showUnusedLabels } from "../commands/showUnusedLabels";
 import { CodeLensProvider } from "../codelens/CodeLensProvider";
 import { CompletionProvider } from "../completion/CompletionProvider";
 import { DefinitionProvider } from "../definition/DefinitionProvider";
+import { ReferenceProvider } from "../reference/ReferenceProvider";
 
 const asmListFiles: vscode.DocumentSelector = [{ scheme: "file", language: "bcomp-asm" }];
 
@@ -51,4 +52,10 @@ export function activate(context: vscode.ExtensionContext) {
     );
     context.subscriptions.push(definitionProvider);
 
+    // Register references 
+    const referenceProvider = vscode.languages.registerReferenceProvider(
+        asmListFiles,
+        new ReferenceProvider()
+    );
+    context.subscriptions.push(referenceProvider);
 }
