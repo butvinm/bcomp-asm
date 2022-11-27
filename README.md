@@ -6,8 +6,7 @@
 It provides support for:
 - Assembler syntax highlighting.
 - Completions: While you type completions are proposed based on the labels in your asm files.
-- "Find all references": through a right mouse click in your assembler source file. It will come up with all found references in the other files.
-- Command: bcomp-asm.find-labels-with-no-reference to find all labels that are not referenced. Useful to find dead code.
+- Unused references: bcomp-asm.find-unused-labels to find all labels that are not referenced. Useful to find dead code.
 - Code Lens: Above symbols it shows the number of references. You can click it to get to the references.
 - Labels definitions finding
 <!-- - Hovering: When hovering over a symbol it shows the comments for the symbol.
