@@ -24,7 +24,7 @@ export function getProgTree(): ProgContext | undefined {
 	return tree;
 }
 
-export function getLabelsDefinitions(tree: ProgContext) {
+export function getLabelsDefinitions(tree: ProgContext): LblContext[] {
 	const listener = new labelsDefinitionListener();
 	const walkListener: basmListener = listener;
 	ParseTreeWalker.DEFAULT.walk(walkListener, tree);
@@ -39,7 +39,7 @@ class labelsDefinitionListener implements basmListener {
 	}
 }
 
-export function getLabelsRefs(tree: ProgContext) {
+export function getLabelsRefs(tree: ProgContext): LabelContext[] {
 	const listener = new labelsRefsListener();
 	const walkListener: basmListener = listener;
 	ParseTreeWalker.DEFAULT.walk(walkListener, tree);
@@ -49,7 +49,34 @@ export function getLabelsRefs(tree: ProgContext) {
 class labelsRefsListener implements basmListener {
 	public lbls: LabelContext[] = [];
 
-	enterLabel(context: LabelContext) {
-		this.lbls.push(context);
-	}
+    enterLabel(context: LabelContext) {
+        if (!(context.parent instanceof LblContext)) {
+            this.lbls.push(context);
+        }
+    }
+    
+}
+
+export function getRefsLocations(document: vscode.TextDocument, tree: ProgContext): Map<string, Array<vscode.Location>> {
+    const labelsRefs = getLabelsRefs(tree);
+    const refsLocations = new Map();
+    for (let labelRef of labelsRefs) {
+        const refName = labelRef.text;
+        // get location 
+        const lineNumber = labelRef.start.line - 1;
+        const startIndex = labelRef.start.charPositionInLine;
+        const stopIndex = startIndex + labelRef.text.length;
+        const startPos = new vscode.Position(lineNumber, startIndex);
+        const endPos = new vscode.Position(lineNumber, stopIndex);
+        const range = new vscode.Range(startPos, endPos);
+        const refLocation = new vscode.Location(document.uri, range);
+
+        if (refsLocations.has(refName)) {
+            refsLocations.get(refName).push(refLocation);
+        } else {
+            refsLocations.set(refName, [refLocation]);
+        }
+    }
+
+    return refsLocations;
 }

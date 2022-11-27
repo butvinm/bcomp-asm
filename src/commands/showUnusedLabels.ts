@@ -10,16 +10,14 @@ export function showUnusedLabels() {
 	const outputChannel = vscode.window.createOutputChannel("Parsed Basm");
 
 	const labelsRefs = getLabelsRefs(tree);
-	const usedRefs: string[] = [];
+	const labelsRefsNames = new Set<string>();
     for (let ref of labelsRefs) {
-        if (!(ref.parent instanceof LblContext)) {
-            usedRefs.push(ref.text);
-        }
+        labelsRefsNames.add(ref.text);
 	}
-    // const labels = new Set()
+
 	const labelsDefinitions = getLabelsDefinitions(tree);
 	for (let lbl of labelsDefinitions) {
-		if (!usedRefs.includes(lbl.text.slice(0, -1))) {
+		if (!labelsRefsNames.has(lbl.text.slice(0, -1))) {
             outputChannel.appendLine(`Unused label ${lbl.text} at line ${lbl._start.line}`)
 		}
 	}
