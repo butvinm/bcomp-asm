@@ -16,7 +16,7 @@ export function showUnusedLabels() {
             usedRefs.push(ref.text);
         }
 	}
-
+    // const labels = new Set()
 	const labelsDefinitions = getLabelsDefinitions(tree);
 	for (let lbl of labelsDefinitions) {
 		if (!usedRefs.includes(lbl.text.slice(0, -1))) {
