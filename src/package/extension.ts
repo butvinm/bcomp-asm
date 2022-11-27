@@ -4,6 +4,7 @@ import { PackageInfo } from "./packageinfo";
 import { showParsedAsm } from "../commands/showParsedAsm";
 import { showUnusedLabels } from "../commands/showUnusedLabels";
 import { CodeLensProvider } from "../codelens/CodeLensProvider";
+import { CompletionProvider } from "../completion/CompletionProvider";
 
 const asmListFiles: vscode.DocumentSelector = [{ scheme: "file", language: "bcomp-asm" }];
 
@@ -29,10 +30,16 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// Register CodeLens
 
-	const codeLensProvider = new CodeLensProvider();
-	const provider = vscode.languages.registerCodeLensProvider(
-		asmListFiles,
-		codeLensProvider
+    const codeLensProvider = vscode.languages.registerCodeLensProvider(
+        asmListFiles,
+        new CodeLensProvider()
 	);
-	context.subscriptions.push(provider);
+	context.subscriptions.push(codeLensProvider);
+
+    // Register Completions
+    const completionProvider = vscode.languages.registerCompletionItemProvider(
+        asmListFiles,
+        new CompletionProvider()
+    );
+    context.subscriptions.push(completionProvider);
 }
