@@ -15,6 +15,15 @@ It provides support for:
 
 It supports the `.bcomp` extension
 
+## Todo
+- Difference between variables/code blocks in suggestions
+- Theory page
+- Info about commands on hovering
+- Syntax analyzing and error detection
+- Snippets
+- INCLUDE, MODULE, stdlib and precompilator
+- and more-more other...
+
 ## Installation
 
 Install by extension package from [vsix extensiong](https://github.com/mamsdeveloper/bcomp-asm/tree/master/release).
