@@ -13,7 +13,7 @@ It provides support for:
 - Outline view: View your labels (code, data, constants) in the outline view.
 - Rename symbols. -->
 
-It supports the `.bcomp` extension
+It supports the `.bcomp` and `.basm` extension
 
 ## Todo
 - Difference between variables/code blocks in suggestions
