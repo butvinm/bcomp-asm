@@ -31,11 +31,7 @@ Just add ```bcomp``` to your code blocks.
 
 Basic Computer Assembly is licensed under the [MIT license](LICENSE.txt).
 
-This extension made use of 4 other packages:
-- [asm-code-lens](https://github.com/maziac/asm-code-lens)
-- [find all references](https://github.com/gayanhewa/vscode-find-all-references) by gayanhewa, MIT License
-- [grob](https://www.npmjs.com/package/grob) by jamiebuilds, MIT License
-- [vscode-whats-new](https://github.com/alefragnani/vscode-whats-new) project from Alessandro Fragnani aka [alefragni](https://github.com/alefragnani), MIT License
+This extension made use of 0 other packages (except 72mb of node modules)
 
 Many thanks to the authors.
 
