@@ -92,7 +92,7 @@
         "compile": "tsc -p ./",
         "tslint": "eslint ./**/*.ts",
         "watch": "tsc -w -p ./",
-        "package": "vsce package -o ./release/bcom-asm-2.0.0.vsix",
+        "package": "vsce package -o ./release/bcom-asm-2.0.1.vsix",
         "publish": "vsce publish",
         "antlr4ts": "antlr4ts -o ./src/parser grammar/basm.g4"
     },
